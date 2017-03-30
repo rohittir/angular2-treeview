@@ -1,4 +1,10 @@
-# Ng2Tree
+# Demo
+[Click here](https://rohittir.github.io/angular2-treeview/) for the demo
+
+# Details
+This is a custom And-OR Treeview generated using angular2 framework and components. Multiple nodes can be added or deleted at runtime.
+
+# Angular2Tree
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
