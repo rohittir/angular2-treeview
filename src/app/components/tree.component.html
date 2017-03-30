@@ -1,0 +1,11 @@
+<div id="container">
+  <h2 style="text-align:center;">AND/OR Tree</h2>
+    <form style="text-align:center;" class="wrap">
+    <button class="Button" (click)="onExpandAll(rootNode)"> <b>Expand All</b></button>
+    &nbsp;<button class="Button" (click)="onCollapseAll(rootNode)"> <b>Collapse All</b></button><br><br>
+    <b>New Root Node:</b> <input style="height:20px;font-size: 15px;" #box (keyup.enter)="onAddRootNodeEnter(box.value)" value={{value}}>
+    </form>
+    <node-view (callNodesAndOrPropUpdate)="onNodeEvent($event)" [childrenNodes]="rootNode.children"></node-view><br>
+      <h3> Total AND Nodes: {{getTotalAndNodes(rootNode)}}</h3>
+     <h3> Total OR Nodes: {{getTotalORNodes(rootNode)}}</h3>
+    </div>

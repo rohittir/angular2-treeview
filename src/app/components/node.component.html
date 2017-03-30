@@ -1,0 +1,38 @@
+<ng-container *ngFor="let node of childrenNodes, let i = index">
+  <ul style="list-style: none; ">
+    <li>
+    <ng-container *ngIf="numChildren(node)===0">
+      <button class="link2"> <b>&#x25CF;</b></button>
+    </ng-container>
+    <ng-container *ngIf="numChildren(node) > 0">
+      <button class="button" (click)="collapse(i)"> <b>{{node.IsCollapsed ? "&#x25B6;" : "&#x25BC;"}} </b></button>
+    </ng-container>
+    <ng-container *ngIf="node.IsEditing">
+      <input style="height:20px;font-size: 15px;" #box (keyup.enter)="onEditEnter(box.value, i)" autofocus value={{node.title}}>
+    </ng-container>
+    <ng-container *ngIf="!node.IsEditing">
+      <ng-container *ngIf="node.IsAndNode && numChildren(node) > 0">
+        <button class="Andlink" (dblclick)="rename(i)"><b><font size="4">{{node.title}}</font></b> <span>AND: {{node.mAndNodes}}, OR: {{node.mORNodes}} </span> </button>
+      </ng-container>
+      <ng-container *ngIf="!node.IsAndNode && numChildren(node) > 0">
+        <button class="Orlink" (dblclick)="rename(i)"><b><font size="4">{{node.title}} </font></b> <span>AND: {{node.mAndNodes}}, OR: {{node.mORNodes}} </span> </button>
+      </ng-container>
+      <ng-container *ngIf="numChildren(node) == 0">
+        <button class="link" (dblclick)="rename(i)"><b><font size="4">{{node.title}}</font></b> <span>AND: {{node.mAndNodes}}, OR: {{node.mORNodes}} </span> </button>
+      </ng-container>
+    </ng-container>
+      <button class="tooltip" (click)="add(i)"><b>&#x271A;</b> <!-- <span class="tooltiptext">Add child</span> --> </button>
+      <!-- <button class="tooltip" (click)="rename(i)"><b>&#x270E;</b> <span class="tooltiptext">Rename Node</span> </button> -->
+      <button class="tooltip" (click)="delete(i)"><b>&#x2717;</b> <!-- <span class="tooltiptext">Delete Node</span> --> </button>
+      <div *ngIf="!node.IsCollapsed">
+      <node-view (callNodesAndOrPropUpdate)="onChildEvent($event)" [childrenNodes]="node.children"></node-view>
+      </div>
+    </li>
+    <ul style="list-style: none; " *ngIf="node.IsAdding">
+    <li>
+      <button class="link2"> <b>&#x25CF;</b></button>
+      <input style="height:20px;font-size: 15px;" #box1 (keyup.enter)="onAddEnter(box1.value, i)" autofocus>
+    </li>
+    </ul>
+    </ul>
+  </ng-container>
